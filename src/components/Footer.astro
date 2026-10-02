@@ -1,11 +1,7 @@
 ---
-import { getRelativeLocaleUrl } from "astro:i18n";
 import type { HTMLAttributes } from "astro/types";
-import IconRss from "@/assets/icons/IconRss.svg";
-import LinkButton from "./LinkButton.astro";
 import Socials from "./Socials.astro";
 import { useTranslations } from "@/i18n";
-import config from "@/config";
 
 type Props = {
   noMarginTop?: boolean;
@@ -15,10 +11,6 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
 
 const t = useTranslations(Astro.currentLocale);
 const currentYear = new Date().getFullYear();
-const rssHref = getRelativeLocaleUrl(
-  Astro.currentLocale ?? config.site.lang,
-  "rss.xml"
-);
 ---
 
 <footer
@@ -30,14 +22,6 @@ const rssHref = getRelativeLocaleUrl(
   >
     <div class="mb-2 flex items-center gap-1 sm:mb-0">
       <Socials />
-      <LinkButton href={rssHref} class="p-2 sm:p-1" title="RSS">
-        <IconRss
-          width={24}
-          height={24}
-          class="stroke-muted-foreground stroke-3 opacity-80"
-        />
-        <span class="sr-only">RSS Feed</span>
-      </LinkButton>
     </div>
     <div class="my-2 flex flex-col items-center whitespace-nowrap sm:flex-row">
       <span>{t.footer.copyright} &#169; {currentYear}</span>

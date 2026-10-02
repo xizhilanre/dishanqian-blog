@@ -5,6 +5,10 @@ import config from "@/config";
 
 export const BLOG_PATH = "src/content/posts";
 
+/** 博客文章的分类。顺序即分类页的展示顺序。 */
+export const POST_CATEGORIES = ["随笔", "技术", "生活"] as const;
+export type PostCategory = (typeof POST_CATEGORIES)[number];
+
 const posts = defineCollection({
   loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: `./${BLOG_PATH}` }),
   schema: ({ image }) =>
@@ -15,6 +19,7 @@ const posts = defineCollection({
       title: z.string(),
       featured: z.boolean().optional(),
       draft: z.boolean().optional(),
+      category: z.enum(POST_CATEGORIES).default("随笔"),
       tags: z.array(z.string()).default(["others"]),
       ogImage: image().or(z.string()).optional(),
       description: z.string(),

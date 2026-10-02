@@ -3,7 +3,7 @@ title: "关于"
 description: "关于我和这个博客：一个长期记录 AI、开发与生活思考的地方。"
 ---
 
-你好，这里是 <span class="text-accent font-medium">**你的名字**</span>（[FILL_ME]）的博客。
+你好，这里是 <span class="text-accent font-medium">**地山谦**</span>的博客。
 
 我是一名正在成长的开发者和 AI 从业者，长期关注 **AI、Agent、AI 产品** 与 **前端 / 全栈开发**。这个博客是我记录学习、实践与思考的地方。
 
@@ -19,12 +19,12 @@ description: "关于我和这个博客：一个长期记录 AI、开发与生活
 ## 关于这个博客
 
 - 纯静态站点，基于 [Astro](https://astro.build/) 构建，专注阅读，加载很快。
-- 支持亮 / 暗色模式、站内搜索、标签与 RSS 订阅。
+- 支持亮 / 暗色模式、站内搜索与标签。
 - 我尽量隔一段时间就写一篇，不追求高产，但求每篇都认真。
 
 ## 联系我
 
-- **GitHub**：[FILL_ME]（[github.com/your-github](https://github.com/your-github)）
-- **Email**：[FILL_ME]（you@example.com）
+- **GitHub**：[xizhilanre](https://github.com/xizhilanre)
+- **Email**：[xizhilanre@gmail.com](mailto:xizhilanre@gmail.com)
 
 如果你也对 AI、Agent 或开发感兴趣，欢迎通过上面任一方式和我交流。

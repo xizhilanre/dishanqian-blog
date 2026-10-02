@@ -13,14 +13,14 @@ export default defineAstroPaperConfig({
   site: {
     // [FILL_ME] 正式部署后的站点 URL（带协议，末尾斜杠可带可不带）。
     // canonical / sitemap / RSS 都基于它生成。
-    url: "https://your-domain.example.com/",
+    url: "https://dishanqian-blog.pages.dev/",
     // [FILL_ME] 博客名称，显示在顶部与各页面标题。
-    title: "我的博客",
+    title: "地山谦のBlog",
     // [FILL_ME] 站点描述，用于 SEO 与 RSS。
     description:
       "长期记录 AI、Agent、软件开发与生活思考的个人博客。技术学习与实践的笔记集。",
     // [FILL_ME] 作者名字，用于文章默认作者与 SEO。
-    author: "你的名字",
+    author: "地山谦",
     // [FILL_ME] 作者个人主页（例如关于页 / 个人站点），用于结构化数据。可留空。
     profile: "",
     // 默认分享图（public/default-og.jpg）。换成你自己的图后改这里文件名。
@@ -52,15 +52,15 @@ export default defineAstroPaperConfig({
   // 底部社交入口：只保留 GitHub 与 Email，克制一点。
   socials: [
     // [FILL_ME] 替换成你的 GitHub 主页。
-    { name: "github", url: "https://github.com/your-github" },
+    { name: "github", url: "https://github.com/xizhilanre" },
     // [FILL_ME] 替换成你的邮箱。
-    { name: "mail", url: "mailto:you@example.com" },
+    { name: "mail", url: "mailto:xizhilanre@gmail.com" },
   ],
   // 文章页“分享到”入口，保留常用的即可。不需要就清空数组。
   shareLinks: [
-    { name: "whatsapp", url: "https://wa.me/?text=" },
-    { name: "x", url: "https://x.com/intent/post?url=" },
-    { name: "telegram", url: "https://t.me/share/url?url=" },
-    { name: "mail", url: "mailto:?subject=See%20this%20post&body=" },
+    // { name: "whatsapp", url: "https://wa.me/?text=" },
+    // { name: "x", url: "https://x.com/intent/post?url=" },
+    // { name: "telegram", url: "https://t.me/share/url?url=" },
+    // { name: "mail", url: "mailto:?subject=See%20this%20post&body=" },
   ],
 });

@@ -32,6 +32,12 @@ const navLabels: Record<string, string> = {
   search: t.nav.search,
 };
 
+// Collapse `categories/<category>` breadcrumbs to just the category name,
+// e.g. Home > 首页 » <随笔> instead of 首页 » 分类 » 随笔.
+if (breadcrumbList[0] === "categories") {
+  breadcrumbList.shift();
+}
+
 // if breadcrumb is Home > Posts > [page] <etc>
 // replace Posts with localized "Posts (page number)"
 if (breadcrumbList[0] === "posts") {

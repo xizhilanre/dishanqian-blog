@@ -5,6 +5,7 @@ export default {
     home: "首页",
     posts: "文章",
     tags: "标签",
+    categoryAll: "全部",
     about: "关于",
     archives: "归档",
     search: "搜索",
@@ -43,6 +44,8 @@ export default {
 
     tagsTitle: "标签",
     tagsDesc: "文章里用到的所有标签。",
+
+    categoryDesc: "“{{category}}”下的所有文章",
 
     postsTitle: "文章",
     postsDesc: "我发布过的所有文章。",

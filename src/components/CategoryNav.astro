@@ -1,0 +1,43 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { POST_CATEGORIES } from "@/content.config";
+import { useTranslations } from "@/i18n";
+import config from "@/config";
+
+type Props = {
+  /** "all" for the full posts listing, or a specific category name. */
+  active?: "all" | (typeof POST_CATEGORIES)[number];
+};
+
+const { active = "all" } = Astro.props;
+
+const locale = Astro.currentLocale ?? config.site.lang;
+const t = useTranslations(locale);
+
+const items = [
+  { key: "all", label: t.nav.categoryAll, href: getRelativeLocaleUrl(locale, "posts") },
+  ...POST_CATEGORIES.map(category => ({
+    key: category,
+    label: category,
+    href: getRelativeLocaleUrl(locale, `categories/${category}/`),
+  })),
+];
+---
+
+<nav class="mb-4 flex flex-wrap items-center gap-x-5 gap-y-2">
+  {items.map(({ key, label, href }) => (
+    <a
+      href={href}
+      aria-current={active === key ? "page" : undefined}
+      transition:name={key}
+      class:list={[
+        "border-foreground border-b-2 border-dashed text-sm",
+        "hover:border-accent hover:text-accent hover:-mt-0.5",
+        { "text-accent border-accent": active === key },
+        { "text-muted-foreground border-transparent": active !== key },
+      ]}
+    >
+      {label}
+    </a>
+  ))}
+</nav>
