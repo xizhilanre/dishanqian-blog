@@ -1,0 +1,41 @@
+/* Register design tokens for Tailwind v4 */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  /* 正文字体：优先系统无衬线 + 中文字体栈，避免额外下载网页字体 */
+  --font-app:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Helvetica Neue",
+    Arial, sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+    "Liberation Mono", "PingFang SC", "Microsoft YaHei", monospace;
+}
+
+/* Light theme values —— 明亮、克制的中性灰阶 + 一点柔和蓝绿强调色 */
+:root,
+[data-theme="light"] {
+  --background: #fbfaf8;
+  --foreground: #23211e;
+  --accent: #4a6d6a;
+  --accent-foreground: #ffffff;
+  --muted: #ece9e4;
+  --muted-foreground: #6b6a66;
+  --border: #e5e1da;
+}
+
+/* Dark theme values —— 暖黑 + 低饱和蓝绿，保护眼睛 */
+[data-theme="dark"] {
+  --background: #17181a;
+  --foreground: #dde1de;
+  --accent: #8fb3ae;
+  --accent-foreground: #141618;
+  --muted: #26282b;
+  --muted-foreground: #8a908d;
+  --border: #33363a;
+}

@@ -1,0 +1,140 @@
+---
+import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import IconRss from "@/assets/icons/IconRss.svg";
+import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Card from "@/components/Card.astro";
+import LinkButton from "@/components/LinkButton.astro";
+import Tag from "@/components/Tag.astro";
+import { getSortedPosts } from "@/utils/getSortedPosts";
+import { getUniqueTags } from "@/utils/getUniqueTags";
+import { useTranslations } from "@/i18n";
+import config from "@/config";
+
+const { posts: postsConfig } = config;
+
+const locale = Astro.currentLocale ?? config.site.lang;
+const t = useTranslations(locale);
+
+const posts = await getCollection("posts");
+const sortedPosts = getSortedPosts(posts);
+const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
+const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
+const tags = getUniqueTags(posts);
+const homePath = getRelativeLocaleUrl(locale, "");
+---
+
+<Layout>
+  <Header />
+  <main
+    id="main-content"
+    data-layout="index"
+    data-home-path={homePath}
+    class="app-layout my-1"
+  >
+    <!-- 顶部：博客名称 + 一句话介绍 -->
+    <section id="hero" class="border-border border-b pt-10 pb-8">
+      <div class="flex items-center gap-3">
+        <h1 class="my-2 inline-block text-3xl font-bold tracking-tight sm:text-4xl">
+          {config.site.title}
+        </h1>
+        <a
+          target="_blank"
+          href={`${import.meta.env.BASE_URL.replace(/\/?$/, "/")}rss.xml`}
+          class="inline-block"
+          aria-label="RSS Feed"
+          title="RSS Feed"
+        >
+          <IconRss
+            width={20}
+            height={20}
+            class="stroke-accent scale-125 stroke-3 rtl:-rotate-90"
+          />
+          <span class="sr-only">RSS Feed</span>
+        </a>
+      </div>
+      <p class="mt-4 max-w-prose text-foreground/85 leading-relaxed">
+        你好，我是
+        <span class="text-accent font-medium">{config.site.author}</span>
+        。这里是一个人在长期记录 AI、Agent、软件开发与生活思考的地方，
+        内容不多，但都是认真写下来的。
+      </p>
+    </section>
+
+    <!-- 精选（可选）：如果没有 featured 文章，该区块自动隐藏 -->
+    {
+      featuredPosts.length > 0 && (
+        <section
+          id="featured"
+          class:list={[
+            "pt-10 pb-4",
+            { "border-border border-b": recentPosts.length > 0 },
+          ]}
+        >
+          <h2 class="text-xl font-semibold tracking-wide">
+            {t.home.featured}
+          </h2>
+          <ul>
+            {featuredPosts.map(data => (
+              <Card variant="h3" {...data} />
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    <!-- 最近文章 -->
+    {
+      recentPosts.length > 0 && (
+        <section id="recent-posts" class="pt-10 pb-4">
+          <h2 class="mb-4 text-xl font-semibold tracking-wide">
+            {t.home.recentPosts}
+          </h2>
+          <ul>
+            {recentPosts.slice(0, postsConfig.perIndex).map(data => (
+              <Card variant="h3" {...data} />
+            ))}
+          </ul>
+          <div class="my-6">
+            <LinkButton href={getRelativeLocaleUrl(locale, "posts")}>
+              {t.home.allPosts}
+              <IconArrowRight class="inline-block rtl:-rotate-180" />
+            </LinkButton>
+          </div>
+        </section>
+      )
+    }
+
+    <!-- 文章分类 -->
+    {
+      tags.length > 0 && (
+        <section id="categories" class="border-border border-t pt-8 pb-10">
+          <h2 class="mb-4 text-xl font-semibold tracking-wide">文章分类</h2>
+          <p class="text-muted-foreground mb-4 text-sm">
+            我主要记录这些主题，标签会随写作慢慢长出来。
+          </p>
+          <ul class="flex flex-wrap gap-x-5 gap-y-3">
+            {tags.map(({ tag, tagName }) => (
+              <Tag {tag} {tagName} />
+            ))}
+          </ul>
+        </section>
+      )
+    }
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const indexLayout = (document.querySelector("#main-content") as HTMLElement)
+      ?.dataset;
+    const baseRoot = import.meta.env.BASE_URL.replace(/\/?$/, "/");
+    if (indexLayout?.layout) {
+      sessionStorage.setItem("backUrl", indexLayout.homePath ?? baseRoot);
+    }
+  });
+</script>
